@@ -1,2 +1,2 @@
 # ping-pong
-Repository for a simple C# game.
+Simple Windows Forms Application game
