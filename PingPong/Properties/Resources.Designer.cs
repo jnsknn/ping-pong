@@ -73,6 +73,16 @@ namespace PingPong.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap jn {
+            get {
+                object obj = ResourceManager.GetObject("jn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap paddle {
             get {
                 object obj = ResourceManager.GetObject("paddle", resourceCulture);
