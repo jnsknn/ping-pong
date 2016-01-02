@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,7 +20,7 @@ namespace PingPong
         int bdx; // Ball movement in x axis
         int bdy; // Ball movement in y axis
         int bx; // Ball x position
-        int by; // Ball y positions
+        int by; // Ball y position
         int px; // Paddle x position
         int py; // Paddle y position
         int lblgodx; // Game over label movement in x axis
@@ -35,11 +34,6 @@ namespace PingPong
         Boolean gameover;
 
         Random r = new Random();
-        SoundPlayer sndhit = new SoundPlayer(@"sounds\hit.wav");
-        SoundPlayer sndwall = new SoundPlayer(@"sounds\wall.wav");
-        SoundPlayer sndmiss = new SoundPlayer(@"sounds\miss.wav");
-        SoundPlayer sndnew = new SoundPlayer(@"sounds\new.wav");
-        SoundPlayer sndgameover = new SoundPlayer(@"sounds\gameover.wav");
 
         // Methods
 
@@ -85,8 +79,6 @@ namespace PingPong
             lblLife.Text = life.ToString();
             lblGameOverLabel.Text = "";
             lblGameOverLabel.BackColor = Color.White;
-
-            sndnew.Play();
         }
 
         // Events
@@ -121,18 +113,15 @@ namespace PingPong
                 if (bx < 0) // If the ball hits the left wall, change the ball x direction to opposite
                 {
                     bdx = -bdx;
-                    sndwall.Play();
                 }
                 else if (bx + 10 > this.pnlPingPong.Width) // If the ball hits the right wall, change the ball x direction to opposite
                 {
                     bdx = -bdx;
-                    sndwall.Play();
                 }
 
                 if (by < 0) // If the ball hits the top, change the ball y direction to opposite
                 {
                     bdy = -bdy;
-                    sndwall.Play();
                 }
 
                 if ((bx + 10 >= px && bx <= px + 50) && (by + 10 >= py && by <= py + 10)) // If the ball hits the paddle
@@ -142,21 +131,14 @@ namespace PingPong
                     bdy = -bdy;
                     score++;
                     lblScore.Text = score.ToString();
-                    sndhit.Play();
                 }
                 else if (by >= this.pnlPingPong.Height + 10) // If the paddle misses the ball
                 {
                     life--;
                     lblLife.Text = life.ToString();
                     by = 1;
-                    if (life >= 1) 
+                    if (life < 1) // Preparations for game over
                     {
-                        sndmiss.Play();
-                    }
-                    else if (life < 1) // Preparations for game over
-                    {
-                        sndgameover.Play();
-
                         lblGameOverLabel.Location = new Point(210, 62);
                         lblGameOverLabel.BackColor = Color.Black;
                         lblGameOverLabel.Text = "Game over!";
