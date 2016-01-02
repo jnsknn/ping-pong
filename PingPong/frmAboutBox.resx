@@ -128,7 +128,7 @@ The game is over when the player has lost all lives. A single life is lost when 
 
 The player can control the paddle with a mouse by keeping a cursor of the mouse on the black game area.
 
- v1.0
+ v1.0.0-beta
   - just a basic PingPong with no extra features
   - an ability to hit a ball with a paddle
   - lives and score counters
