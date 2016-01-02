@@ -21,7 +21,7 @@ namespace PingPong
         int bdx; // Ball movement in x axis
         int bdy; // Ball movement in y axis
         int bx; // Ball x position
-        int by; // Ball y position
+        int by; // Ball y positions
         int px; // Paddle x position
         int py; // Paddle y position
         int lblgodx; // Game over label movement in x axis
