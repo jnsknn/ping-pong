@@ -38,6 +38,8 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblLivesLabel = new System.Windows.Forms.Label();
+            this.lblScoreLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,12 +121,34 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // lblLivesLabel
+            // 
+            this.lblLivesLabel.AutoSize = true;
+            this.lblLivesLabel.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLivesLabel.Location = new System.Drawing.Point(12, 24);
+            this.lblLivesLabel.Name = "lblLivesLabel";
+            this.lblLivesLabel.Size = new System.Drawing.Size(65, 24);
+            this.lblLivesLabel.TabIndex = 2;
+            this.lblLivesLabel.Text = "Lives";
+            // 
+            // lblScoreLabel
+            // 
+            this.lblScoreLabel.AutoSize = true;
+            this.lblScoreLabel.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScoreLabel.Location = new System.Drawing.Point(519, 24);
+            this.lblScoreLabel.Name = "lblScoreLabel";
+            this.lblScoreLabel.Size = new System.Drawing.Size(69, 24);
+            this.lblScoreLabel.TabIndex = 3;
+            this.lblScoreLabel.Text = "Score";
+            // 
             // frmPingPong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(600, 461);
+            this.Controls.Add(this.lblScoreLabel);
+            this.Controls.Add(this.lblLivesLabel);
             this.Controls.Add(this.pnlPingPong);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -150,6 +174,8 @@
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.Label lblLivesLabel;
+        private System.Windows.Forms.Label lblScoreLabel;
     }
 }
 
