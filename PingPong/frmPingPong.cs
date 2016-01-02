@@ -35,11 +35,11 @@ namespace PingPong
         Boolean gameover;
 
         Random r = new Random();
-        SoundPlayer sndhit = new SoundPlayer(@"..\..\hit.wav");
-        SoundPlayer sndwall = new SoundPlayer(@"..\..\wall.wav");
-        SoundPlayer sndmiss = new SoundPlayer(@"..\..\miss.wav");
-        SoundPlayer sndnew = new SoundPlayer(@"..\..\new.wav");
-        SoundPlayer sndgameover = new SoundPlayer(@"..\..\gameover.wav");
+        SoundPlayer sndhit = new SoundPlayer(@"sounds\hit.wav");
+        SoundPlayer sndwall = new SoundPlayer(@"sounds\wall.wav");
+        SoundPlayer sndmiss = new SoundPlayer(@"sounds\miss.wav");
+        SoundPlayer sndnew = new SoundPlayer(@"sounds\new.wav");
+        SoundPlayer sndgameover = new SoundPlayer(@"sounds\gameover.wav");
 
         // Methods
 
