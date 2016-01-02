@@ -6,3 +6,9 @@ Goal of this game is to get as big score as possible. A player gains a point whe
 The game is over when the player has lost all lives. A single life is lost when the ball misses the paddle.
 
 The player can control the paddle with a mouse by keeping a cursor of the mouse on the black game area.
+
+# v.1.0
+  - just a basic PingPong with no extra features
+  - an ability to hit a ball with a paddle
+  - lives and score counters
+  - new game, exit and about window
