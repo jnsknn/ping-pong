@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlPingPong = new System.Windows.Forms.Panel();
+            this.imgBall = new System.Windows.Forms.PictureBox();
+            this.imgPaddle = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,12 +44,12 @@
             this.lblScore = new System.Windows.Forms.Label();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
             this.lblGameOverLabel = new System.Windows.Forms.Label();
-            this.imgBall = new System.Windows.Forms.PictureBox();
-            this.imgPaddle = new System.Windows.Forms.PictureBox();
+            this.lblLevelLabel = new System.Windows.Forms.Label();
+            this.lblLevel = new System.Windows.Forms.Label();
             this.pnlPingPong.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPaddle)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlPingPong
@@ -64,6 +66,24 @@
             this.pnlPingPong.MouseEnter += new System.EventHandler(this.pnlPingPong_MouseEnter);
             this.pnlPingPong.MouseLeave += new System.EventHandler(this.pnlPingPong_MouseLeave);
             this.pnlPingPong.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlPingPong_MouseMove);
+            // 
+            // imgBall
+            // 
+            this.imgBall.Image = global::PingPong.Properties.Resources.ball;
+            this.imgBall.Location = new System.Drawing.Point(1, 1);
+            this.imgBall.Name = "imgBall";
+            this.imgBall.Size = new System.Drawing.Size(10, 10);
+            this.imgBall.TabIndex = 1;
+            this.imgBall.TabStop = false;
+            // 
+            // imgPaddle
+            // 
+            this.imgPaddle.Image = global::PingPong.Properties.Resources.paddle;
+            this.imgPaddle.Location = new System.Drawing.Point(275, 385);
+            this.imgPaddle.Name = "imgPaddle";
+            this.imgPaddle.Size = new System.Drawing.Size(50, 10);
+            this.imgPaddle.TabIndex = 0;
+            this.imgPaddle.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -117,40 +137,40 @@
             // lblLivesLabel
             // 
             this.lblLivesLabel.AutoSize = true;
-            this.lblLivesLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLivesLabel.Location = new System.Drawing.Point(12, 40);
+            this.lblLivesLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLivesLabel.Location = new System.Drawing.Point(12, 41);
             this.lblLivesLabel.Name = "lblLivesLabel";
-            this.lblLivesLabel.Size = new System.Drawing.Size(50, 19);
+            this.lblLivesLabel.Size = new System.Drawing.Size(47, 18);
             this.lblLivesLabel.TabIndex = 2;
             this.lblLivesLabel.Text = "Lives";
             // 
             // lblScoreLabel
             // 
             this.lblScoreLabel.AutoSize = true;
-            this.lblScoreLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScoreLabel.Location = new System.Drawing.Point(95, 40);
+            this.lblScoreLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScoreLabel.Location = new System.Drawing.Point(87, 41);
             this.lblScoreLabel.Name = "lblScoreLabel";
-            this.lblScoreLabel.Size = new System.Drawing.Size(54, 19);
+            this.lblScoreLabel.Size = new System.Drawing.Size(50, 18);
             this.lblScoreLabel.TabIndex = 3;
             this.lblScoreLabel.Text = "Score";
             // 
             // lblLife
             // 
             this.lblLife.AutoSize = true;
-            this.lblLife.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLife.Location = new System.Drawing.Point(68, 40);
+            this.lblLife.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLife.Location = new System.Drawing.Point(65, 41);
             this.lblLife.Name = "lblLife";
-            this.lblLife.Size = new System.Drawing.Size(17, 18);
+            this.lblLife.Size = new System.Drawing.Size(16, 17);
             this.lblLife.TabIndex = 4;
             this.lblLife.Text = "3";
             // 
             // lblScore
             // 
             this.lblScore.AutoSize = true;
-            this.lblScore.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScore.Location = new System.Drawing.Point(155, 40);
+            this.lblScore.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScore.Location = new System.Drawing.Point(143, 41);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(17, 18);
+            this.lblScore.Size = new System.Drawing.Size(16, 17);
             this.lblScore.TabIndex = 5;
             this.lblScore.Text = "0";
             // 
@@ -171,23 +191,25 @@
             this.lblGameOverLabel.TabIndex = 2;
             this.lblGameOverLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // imgBall
+            // lblLevelLabel
             // 
-            this.imgBall.Image = global::PingPong.Properties.Resources.ball;
-            this.imgBall.Location = new System.Drawing.Point(1, 1);
-            this.imgBall.Name = "imgBall";
-            this.imgBall.Size = new System.Drawing.Size(10, 10);
-            this.imgBall.TabIndex = 1;
-            this.imgBall.TabStop = false;
+            this.lblLevelLabel.AutoSize = true;
+            this.lblLevelLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLevelLabel.Location = new System.Drawing.Point(12, 24);
+            this.lblLevelLabel.Name = "lblLevelLabel";
+            this.lblLevelLabel.Size = new System.Drawing.Size(48, 18);
+            this.lblLevelLabel.TabIndex = 6;
+            this.lblLevelLabel.Text = "Level";
             // 
-            // imgPaddle
+            // lblLevel
             // 
-            this.imgPaddle.Image = global::PingPong.Properties.Resources.paddle;
-            this.imgPaddle.Location = new System.Drawing.Point(275, 385);
-            this.imgPaddle.Name = "imgPaddle";
-            this.imgPaddle.Size = new System.Drawing.Size(50, 10);
-            this.imgPaddle.TabIndex = 0;
-            this.imgPaddle.TabStop = false;
+            this.lblLevel.AutoSize = true;
+            this.lblLevel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLevel.Location = new System.Drawing.Point(65, 24);
+            this.lblLevel.Name = "lblLevel";
+            this.lblLevel.Size = new System.Drawing.Size(16, 17);
+            this.lblLevel.TabIndex = 7;
+            this.lblLevel.Text = "1";
             // 
             // frmPingPong
             // 
@@ -195,6 +217,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(600, 461);
+            this.Controls.Add(this.lblLevel);
+            this.Controls.Add(this.lblLevelLabel);
             this.Controls.Add(this.lblGameOverLabel);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.lblLife);
@@ -209,10 +233,10 @@
             this.Text = "PingPong";
             this.Load += new System.EventHandler(this.frmPingPong_Load);
             this.pnlPingPong.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPaddle)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,6 +259,8 @@
         private System.Windows.Forms.PictureBox imgBall;
         private System.Windows.Forms.Timer gameTimer;
         private System.Windows.Forms.Label lblGameOverLabel;
+        private System.Windows.Forms.Label lblLevelLabel;
+        private System.Windows.Forms.Label lblLevel;
     }
 }
 

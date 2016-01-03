@@ -63,18 +63,18 @@
             this.lblVersionLabel.AutoSize = true;
             this.lblVersionLabel.Location = new System.Drawing.Point(119, 37);
             this.lblVersionLabel.Name = "lblVersionLabel";
-            this.lblVersionLabel.Size = new System.Drawing.Size(77, 14);
+            this.lblVersionLabel.Size = new System.Drawing.Size(62, 14);
             this.lblVersionLabel.TabIndex = 2;
-            this.lblVersionLabel.Text = "Master branch";
+            this.lblVersionLabel.Text = "v1.1.0-beta";
             // 
             // lblCopyrightLabel
             // 
             this.lblCopyrightLabel.AutoSize = true;
             this.lblCopyrightLabel.Location = new System.Drawing.Point(119, 60);
             this.lblCopyrightLabel.Name = "lblCopyrightLabel";
-            this.lblCopyrightLabel.Size = new System.Drawing.Size(159, 14);
+            this.lblCopyrightLabel.Size = new System.Drawing.Size(121, 14);
             this.lblCopyrightLabel.TabIndex = 3;
-            this.lblCopyrightLabel.Text = "Copyright Jonne Niskanen 2016";
+            this.lblCopyrightLabel.Text = "© 2016 Jonne Niskanen";
             // 
             // lblLicenseLabel
             // 

@@ -30,6 +30,7 @@ namespace PingPong
         int lblgoy; // Game over label y position
         int score; // Counter for how many times ball hits the paddle
         int life; // Number of lives
+        int level; // Level and score + difficulty multiplier
 
         Boolean hit;
         Boolean gameover;
@@ -47,7 +48,7 @@ namespace PingPong
         {
             // This method resets everything to starting position and starts the game from the beginning immediatly. The balls x starting position and direction is defined randomly.
             try {
-                speed = 3;
+                speed = 2;
 
                 if (r.Next(2) == 1)
                 {
@@ -69,6 +70,7 @@ namespace PingPong
                 lblgoy = 62;
                 score = 0;
                 life = 3;
+                level = 1;
 
                 hit = false;
                 gameover = false;
@@ -78,6 +80,7 @@ namespace PingPong
 
                 lblScore.Text = score.ToString();
                 lblLife.Text = life.ToString();
+                lblLevel.Text = level.ToString();
                 lblGameOverLabel.Text = "";
                 lblGameOverLabel.BackColor = Color.White;
             }
@@ -135,13 +138,30 @@ namespace PingPong
                     if ((bx + 10 >= px && bx <= px + 50) && (by + 10 >= py && by <= py + 10)) // If the ball hits the paddle
                     {
                         hit = true;
-                        by += -20;
-                        bdy = -bdy;
-                        score++;
+                        by += -(imgBall.Height + imgPaddle.Height); // This is for bouncing the ball when it's hitting the paddle to avoid "cheating"
+
+                        if (score%5 == 1)
+                        {
+                            level++;
+                            lblLevel.Text = level.ToString();
+                        }
+
+                        if (bdx < 0) // This is to know which direction with current level speed in x axis we want to move the ball...
+                        {
+                            bdx = -level; // ...left...
+                        }
+                        else
+                        {
+                            bdx = level; // ... or right
+                        }
+
+                        bdy = -level;
+                        score += level;
                         lblScore.Text = score.ToString();
                     }
                     else if (by >= this.pnlPingPong.Height + 10) // If the paddle misses the ball
                     {
+                        hit = false;
                         life--;
                         lblLife.Text = life.ToString();
                         by = 1;
