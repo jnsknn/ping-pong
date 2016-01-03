@@ -12,6 +12,7 @@ namespace PingPong
 {
     /* This program is a game which allow the player to return the ball. If the ball passes the paddle, player will lose a life.
         When lives are less than zero, game is over */
+
     public partial class frmPingPong : Form
     {
         // Initial variables
@@ -45,40 +46,45 @@ namespace PingPong
         public void newGame()
         {
             // This method resets everything to starting position and starts the game from the beginning immediatly. The balls x starting position and direction is defined randomly.
+            try {
+                speed = 3;
 
-            speed = 3;
+                if (r.Next(2) == 1)
+                {
+                    bdx = speed;
+                }
+                else
+                {
+                    bdx = -speed;
+                }
 
-            if (r.Next(2) == 1)
-            {
-                bdx = speed;
+                bdy = speed;
+                bx = r.Next(1, 591);
+                by = 1;
+                px = 275;
+                py = 385;
+                lblgodx = 1;
+                lblgody = 1;
+                lblgox = 210;
+                lblgoy = 62;
+                score = 0;
+                life = 3;
+
+                hit = false;
+                gameover = false;
+
+                imgPaddle.Location = new Point(px, py);
+                lblGameOverLabel.Location = new Point(lblgox, lblgoy);
+
+                lblScore.Text = score.ToString();
+                lblLife.Text = life.ToString();
+                lblGameOverLabel.Text = "";
+                lblGameOverLabel.BackColor = Color.White;
             }
-            else
+            catch (Exception exc)
             {
-                bdx = -speed;
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
             }
-            
-            bdy = speed;
-            bx = r.Next(1,591);
-            by = 1;
-            px = 275;
-            py = 385;
-            lblgodx = 1;
-            lblgody = 1;
-            lblgox = 210;
-            lblgoy = 62;
-            score = 0;
-            life = 3;
-
-            hit = false;
-            gameover = false;
-
-            imgPaddle.Location = new Point(px, py);
-            lblGameOverLabel.Location = new Point(lblgox, lblgoy);
-
-            lblScore.Text = score.ToString();
-            lblLife.Text = life.ToString();
-            lblGameOverLabel.Text = "";
-            lblGameOverLabel.BackColor = Color.White;
         }
 
         // Events
@@ -100,96 +106,109 @@ namespace PingPong
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            if (life > 0 || gameover == false)
+            try
             {
-                imgBall.Location = new Point(bx, by); // Sets a new point for the ball every time when gameTimer ticks
+                if (life > 0 || gameover == false)
+                {
+                    imgBall.Location = new Point(bx, by); // Sets a new point for the ball every time when gameTimer ticks
 
-                if (!hit)
-                {
-                    bx += bdx; // Increasing the ball x position every time when gameTimer ticks
-                    by += bdy; // Increasing the ball y position every time when gameTimer ticks
-                }
-
-                if (bx < 0) // If the ball hits the left wall, change the ball x direction to opposite
-                {
-                    bdx = -bdx;
-                }
-                else if (bx + 10 > this.pnlPingPong.Width) // If the ball hits the right wall, change the ball x direction to opposite
-                {
-                    bdx = -bdx;
-                }
-
-                if (by < 0) // If the ball hits the top, change the ball y direction to opposite
-                {
-                    bdy = -bdy;
-                }
-
-                if ((bx + 10 >= px && bx <= px + 50) && (by + 10 >= py && by <= py + 10)) // If the ball hits the paddle
-                {
-                    hit = true;
-                    by += -20;
-                    bdy = -bdy;
-                    score++;
-                    lblScore.Text = score.ToString();
-                }
-                else if (by >= this.pnlPingPong.Height + 10) // If the paddle misses the ball
-                {
-                    life--;
-                    lblLife.Text = life.ToString();
-                    by = 1;
-                    if (life < 1) // Preparations for game over
+                    if (!hit)
                     {
-                        lblGameOverLabel.Location = new Point(210, 62);
-                        lblGameOverLabel.BackColor = Color.Black;
-                        lblGameOverLabel.Text = "Game over!";
+                        bx += bdx; // Increasing the ball x position every time when gameTimer ticks
+                        by += bdy; // Increasing the ball y position every time when gameTimer ticks
+                    }
 
-                        gameover = true;
+                    if (bx < 0) // If the ball hits the left wall, change the ball x direction to opposite
+                    {
+                        bdx = -bdx;
+                    }
+                    else if (bx + 10 > this.pnlPingPong.Width) // If the ball hits the right wall, change the ball x direction to opposite
+                    {
+                        bdx = -bdx;
+                    }
 
-                        py = this.pnlPingPong.Height + 1;
-                        by = this.pnlPingPong.Height + 1;
+                    if (by < 0) // If the ball hits the top, change the ball y direction to opposite
+                    {
+                        bdy = -bdy;
+                    }
+
+                    if ((bx + 10 >= px && bx <= px + 50) && (by + 10 >= py && by <= py + 10)) // If the ball hits the paddle
+                    {
+                        hit = true;
+                        by += -20;
+                        bdy = -bdy;
+                        score++;
+                        lblScore.Text = score.ToString();
+                    }
+                    else if (by >= this.pnlPingPong.Height + 10) // If the paddle misses the ball
+                    {
+                        life--;
+                        lblLife.Text = life.ToString();
+                        by = 1;
+                        if (life < 1) // Preparations for game over
+                        {
+                            lblGameOverLabel.Location = new Point(210, 62);
+                            lblGameOverLabel.BackColor = Color.Black;
+                            lblGameOverLabel.Text = "Game over!";
+
+                            gameover = true;
+
+                            py = this.pnlPingPong.Height + 1;
+                            by = this.pnlPingPong.Height + 1;
+                        }
+                    }
+                    else
+                    {
+                        hit = false;
                     }
                 }
-                else
+                else if (life <= 0 || gameover) // All the lives are gone or the game is over
                 {
-                    hit = false;
+                    lblGameOverLabel.Location = new Point(lblgox, lblgoy);
+
+                    lblgox += lblgodx;
+                    lblgoy += lblgody;
+
+                    if (lblgox < 0 || lblgox > pnlPingPong.Width - lblGameOverLabel.Width)
+                    {
+                        lblgodx = -lblgodx;
+                    }
+
+                    if (lblgoy < 61 || lblgoy > pnlPingPong.Height)
+                    {
+                        lblgody = -lblgody;
+                    }
                 }
             }
-            else if (life <= 0 || gameover) // All the lives are gone or the game is over
+            catch (Exception exc)
             {
-                lblGameOverLabel.Location = new Point(lblgox, lblgoy);
-
-                lblgox += lblgodx;
-                lblgoy += lblgody;
-
-                if (lblgox < 0 || lblgox > pnlPingPong.Width - lblGameOverLabel.Width)
-                {
-                    lblgodx = -lblgodx;
-                }
-
-                if (lblgoy < 61 || lblgoy > pnlPingPong.Height)
-                {
-                    lblgody = -lblgody;
-                }
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
             }
-            
         }
 
         private void pnlPingPong_MouseMove(object sender, MouseEventArgs e)
         {
-            if (hit == false)
+            try
             {
-                px = e.X; // Changes the paddle x position equal to mouse x position if the ball is not hitting the paddle
-            }
+                if (hit == false)
+                {
+                    px = e.X; // Changes the paddle x position equal to mouse x position if the ball is not hitting the paddle
+                }
 
-            if (px < 0) // Freeze the paddle against the left wall if it tries to escape from pnlPingPong 
-            {
-                px = 0;
+                if (px < 0) // Freeze the paddle against the left wall if it tries to escape from pnlPingPong 
+                {
+                    px = 0;
+                }
+                else if (px > this.pnlPingPong.Width - 50) // Freeze the paddle against the right wall if it tries to escape from pnlPingPong 
+                {
+                    px = this.pnlPingPong.Width - 50;
+                }
+                imgPaddle.Location = new Point(px, py); // Sets a new point for the paddle
             }
-            else if (px > this.pnlPingPong.Width - 50) // Freeze the paddle against the right wall if it tries to escape from pnlPingPong 
+            catch (Exception exc)
             {
-                px = this.pnlPingPong.Width - 50;
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
             }
-            imgPaddle.Location = new Point(px, py); // Sets a new point for the paddle
         }
 
         private void pnlPingPong_MouseLeave(object sender, EventArgs e)
@@ -211,15 +230,22 @@ namespace PingPong
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            gameTimer.Stop();
-
-            DialogResult dr = new DialogResult();
-            frmAboutBox abtbox = new frmAboutBox();
-            dr = abtbox.ShowDialog();
-
-            if (dr == DialogResult.OK)
+            try
             {
-                gameTimer.Start();
+                gameTimer.Stop();
+
+                DialogResult dr = new DialogResult();
+                frmAboutBox abtbox = new frmAboutBox();
+                dr = abtbox.ShowDialog();
+
+                if (dr == DialogResult.OK)
+                {
+                    gameTimer.Start();
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
             }
         }
     }

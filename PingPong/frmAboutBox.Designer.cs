@@ -74,7 +74,7 @@
             this.lblCopyrightLabel.Name = "lblCopyrightLabel";
             this.lblCopyrightLabel.Size = new System.Drawing.Size(159, 14);
             this.lblCopyrightLabel.TabIndex = 3;
-            this.lblCopyrightLabel.Text = "Copyright Jonne Niskanen 2015";
+            this.lblCopyrightLabel.Text = "Copyright Jonne Niskanen 2016";
             // 
             // lblLicenseLabel
             // 
