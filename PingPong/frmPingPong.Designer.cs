@@ -63,8 +63,6 @@
             this.pnlPingPong.Name = "pnlPingPong";
             this.pnlPingPong.Size = new System.Drawing.Size(600, 400);
             this.pnlPingPong.TabIndex = 0;
-            this.pnlPingPong.MouseEnter += new System.EventHandler(this.pnlPingPong_MouseEnter);
-            this.pnlPingPong.MouseLeave += new System.EventHandler(this.pnlPingPong_MouseLeave);
             this.pnlPingPong.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlPingPong_MouseMove);
             // 
             // imgBall

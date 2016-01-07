@@ -237,23 +237,6 @@ namespace PingPong
             }
         }
 
-        private void pnlPingPong_MouseLeave(object sender, EventArgs e)
-        {
-            Cursor.Show();
-        }
-
-        private void pnlPingPong_MouseEnter(object sender, EventArgs e)
-        {
-            if (gameover == false)
-            {
-                Cursor.Hide();
-            }
-            else
-            {
-                Cursor.Show();
-            }
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
