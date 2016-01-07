@@ -49,6 +49,7 @@ namespace PingPong
         {
             // This method resets everything to starting position and starts the game from the beginning immediatly. The balls x starting position and direction is defined randomly.
             try {
+
                 speed = 1;
 
                 if (r.Next(2) == 1)
@@ -72,6 +73,7 @@ namespace PingPong
                 score = 0;
                 life = 3;
                 level = 1;
+                levelscore = 0;
 
                 hit = false;
                 gameover = false;
