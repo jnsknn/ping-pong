@@ -128,6 +128,9 @@ The game is over when the player has lost all lives. A single life is lost when 
 
 The player can control the paddle with a mouse by keeping a cursor of the mouse on the black game area.
 
+v1.1.4
+- production ready stable release
+
 v1.1.3-beta
 - removed cursor hide
 - fixed a bug where the paddle was visible when game over

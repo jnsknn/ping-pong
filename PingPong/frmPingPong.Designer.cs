@@ -228,7 +228,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "frmPingPong";
-            this.Text = "PingPong";
+            this.Text = "PingPong v1.1.4";
             this.Load += new System.EventHandler(this.frmPingPong_Load);
             this.pnlPingPong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgBall)).EndInit();
