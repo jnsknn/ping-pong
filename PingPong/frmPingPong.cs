@@ -189,6 +189,7 @@ namespace PingPong
                 else if (life <= 0 || gameover) // All the lives are gone or the game is over
                 {
                     lblGameOverLabel.Location = new Point(lblgox, lblgoy);
+                    imgPaddle.Location = new Point(275, 600);
 
                     lblgox += lblgodx;
                     lblgoy += lblgody;
@@ -217,17 +218,18 @@ namespace PingPong
                 if (hit == false)
                 {
                     px = e.X; // Changes the paddle x position equal to mouse x position if the ball is not hitting the paddle
-                }
 
-                if (px < 0) // Freeze the paddle against the left wall if it tries to escape from pnlPingPong 
-                {
-                    px = 0;
+                    if (px < 0) // Freeze the paddle against the left wall if it tries to escape from pnlPingPong 
+                    {
+                        px = 0;
+                    }
+                    else if (px > this.pnlPingPong.Width - 50) // Freeze the paddle against the right wall if it tries to escape from pnlPingPong 
+                    {
+                        px = this.pnlPingPong.Width - 50;
+                    }
+
+                    imgPaddle.Location = new Point(px, py); // Sets a new point for the paddle
                 }
-                else if (px > this.pnlPingPong.Width - 50) // Freeze the paddle against the right wall if it tries to escape from pnlPingPong 
-                {
-                    px = this.pnlPingPong.Width - 50;
-                }
-                imgPaddle.Location = new Point(px, py); // Sets a new point for the paddle
             }
             catch (Exception exc)
             {
