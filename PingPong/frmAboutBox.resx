@@ -128,6 +128,12 @@ The game is over when the player has lost all lives. A single life is lost when 
 
 The player can control the paddle with a mouse by keeping a cursor of the mouse on the black game area.
 
+v1.1.2-beta
+- changed level progression
+    - difficulty increases with levels
+    - each level lasts longer than previous level
+- game over animation does not freeze when about box is opened
+
 v1.1.1-beta
 - fixed a starting speed of the ball back to 1
 
