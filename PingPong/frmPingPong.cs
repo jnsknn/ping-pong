@@ -31,6 +31,7 @@ namespace PingPong
         int score; // Counter for how many times ball hits the paddle
         int life; // Number of lives
         int level; // Level and score + difficulty multiplier
+        int levelscore; // Level score;
 
         Boolean hit;
         Boolean gameover;
@@ -140,9 +141,10 @@ namespace PingPong
                         hit = true;
                         by += -(imgBall.Height + imgPaddle.Height); // This is for bouncing the ball when it's hitting the paddle to avoid "cheating"
 
-                        if (score%5 == 1)
+                        if ((level <= 1) || ((level > 1 && level <= 5) && score-levelscore > levelscore+5) || (level > 5 && score - levelscore > levelscore)) // Level change
                         {
                             level++;
+                            levelscore = score;
                             lblLevel.Text = level.ToString();
                         }
 
@@ -252,15 +254,24 @@ namespace PingPong
         {
             try
             {
-                gameTimer.Stop();
-
-                DialogResult dr = new DialogResult();
-                frmAboutBox abtbox = new frmAboutBox();
-                dr = abtbox.ShowDialog();
-
-                if (dr == DialogResult.OK)
+                if (gameover)
                 {
-                    gameTimer.Start();
+                    DialogResult dr = new DialogResult();
+                    frmAboutBox abtbox = new frmAboutBox();
+                    dr = abtbox.ShowDialog();
+                }
+                else
+                {
+                    gameTimer.Stop();
+
+                    DialogResult dr = new DialogResult();
+                    frmAboutBox abtbox = new frmAboutBox();
+                    dr = abtbox.ShowDialog();
+
+                    if (dr == DialogResult.OK)
+                    {
+                        gameTimer.Start();
+                    }
                 }
             }
             catch (Exception exc)
