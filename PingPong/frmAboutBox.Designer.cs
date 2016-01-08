@@ -65,7 +65,7 @@
             this.lblVersionLabel.Name = "lblVersionLabel";
             this.lblVersionLabel.Size = new System.Drawing.Size(37, 14);
             this.lblVersionLabel.TabIndex = 2;
-            this.lblVersionLabel.Text = "v1.2.0";
+            this.lblVersionLabel.Text = "v2.0.0";
             // 
             // lblCopyrightLabel
             // 

@@ -227,7 +227,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "frmPingPong";
-            this.Text = "PingPong v1.2.0";
+            this.Text = "PingPong v2.0.0";
             this.Load += new System.EventHandler(this.frmPingPong_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPingPong_KeyDown);
             this.pnlPingPong.ResumeLayout(false);
