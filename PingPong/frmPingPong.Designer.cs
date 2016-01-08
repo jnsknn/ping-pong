@@ -35,6 +35,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.highScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,10 +59,10 @@
             this.pnlPingPong.Controls.Add(this.imgBall);
             this.pnlPingPong.Controls.Add(this.imgPaddle);
             this.pnlPingPong.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlPingPong.Location = new System.Drawing.Point(0, 61);
+            this.pnlPingPong.Location = new System.Drawing.Point(0, 65);
             this.pnlPingPong.Margin = new System.Windows.Forms.Padding(0);
             this.pnlPingPong.Name = "pnlPingPong";
-            this.pnlPingPong.Size = new System.Drawing.Size(600, 400);
+            this.pnlPingPong.Size = new System.Drawing.Size(600, 431);
             this.pnlPingPong.TabIndex = 0;
             // 
             // imgBall
@@ -69,16 +70,16 @@
             this.imgBall.Image = global::PingPong.Properties.Resources.ball;
             this.imgBall.Location = new System.Drawing.Point(1, 1);
             this.imgBall.Name = "imgBall";
-            this.imgBall.Size = new System.Drawing.Size(10, 10);
+            this.imgBall.Size = new System.Drawing.Size(10, 11);
             this.imgBall.TabIndex = 1;
             this.imgBall.TabStop = false;
             // 
             // imgPaddle
             // 
             this.imgPaddle.Image = global::PingPong.Properties.Resources.paddle;
-            this.imgPaddle.Location = new System.Drawing.Point(275, 385);
+            this.imgPaddle.Location = new System.Drawing.Point(275, 415);
             this.imgPaddle.Name = "imgPaddle";
-            this.imgPaddle.Size = new System.Drawing.Size(50, 10);
+            this.imgPaddle.Size = new System.Drawing.Size(50, 11);
             this.imgPaddle.TabIndex = 0;
             this.imgPaddle.TabStop = false;
             // 
@@ -97,6 +98,7 @@
             // 
             this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
+            this.highScoresToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
             this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
@@ -105,14 +107,20 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // highScoresToolStripMenuItem
+            // 
+            this.highScoresToolStripMenuItem.Name = "highScoresToolStripMenuItem";
+            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.highScoresToolStripMenuItem.Text = "High Scores";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -135,7 +143,7 @@
             // 
             this.lblLivesLabel.AutoSize = true;
             this.lblLivesLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLivesLabel.Location = new System.Drawing.Point(12, 41);
+            this.lblLivesLabel.Location = new System.Drawing.Point(12, 44);
             this.lblLivesLabel.Name = "lblLivesLabel";
             this.lblLivesLabel.Size = new System.Drawing.Size(47, 18);
             this.lblLivesLabel.TabIndex = 2;
@@ -145,7 +153,7 @@
             // 
             this.lblScoreLabel.AutoSize = true;
             this.lblScoreLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScoreLabel.Location = new System.Drawing.Point(87, 41);
+            this.lblScoreLabel.Location = new System.Drawing.Point(87, 44);
             this.lblScoreLabel.Name = "lblScoreLabel";
             this.lblScoreLabel.Size = new System.Drawing.Size(50, 18);
             this.lblScoreLabel.TabIndex = 3;
@@ -155,7 +163,7 @@
             // 
             this.lblLife.AutoSize = true;
             this.lblLife.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLife.Location = new System.Drawing.Point(65, 41);
+            this.lblLife.Location = new System.Drawing.Point(65, 44);
             this.lblLife.Name = "lblLife";
             this.lblLife.Size = new System.Drawing.Size(16, 17);
             this.lblLife.TabIndex = 4;
@@ -165,7 +173,7 @@
             // 
             this.lblScore.AutoSize = true;
             this.lblScore.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScore.Location = new System.Drawing.Point(143, 41);
+            this.lblScore.Location = new System.Drawing.Point(143, 44);
             this.lblScore.Name = "lblScore";
             this.lblScore.Size = new System.Drawing.Size(16, 17);
             this.lblScore.TabIndex = 5;
@@ -182,7 +190,7 @@
             this.lblGameOverLabel.AutoSize = true;
             this.lblGameOverLabel.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGameOverLabel.ForeColor = System.Drawing.Color.White;
-            this.lblGameOverLabel.Location = new System.Drawing.Point(210, 24);
+            this.lblGameOverLabel.Location = new System.Drawing.Point(210, 26);
             this.lblGameOverLabel.Name = "lblGameOverLabel";
             this.lblGameOverLabel.Size = new System.Drawing.Size(0, 34);
             this.lblGameOverLabel.TabIndex = 2;
@@ -192,7 +200,7 @@
             // 
             this.lblLevelLabel.AutoSize = true;
             this.lblLevelLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLevelLabel.Location = new System.Drawing.Point(12, 24);
+            this.lblLevelLabel.Location = new System.Drawing.Point(12, 26);
             this.lblLevelLabel.Name = "lblLevelLabel";
             this.lblLevelLabel.Size = new System.Drawing.Size(48, 18);
             this.lblLevelLabel.TabIndex = 6;
@@ -202,7 +210,7 @@
             // 
             this.lblLevel.AutoSize = true;
             this.lblLevel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLevel.Location = new System.Drawing.Point(65, 24);
+            this.lblLevel.Location = new System.Drawing.Point(65, 26);
             this.lblLevel.Name = "lblLevel";
             this.lblLevel.Size = new System.Drawing.Size(16, 17);
             this.lblLevel.TabIndex = 7;
@@ -210,10 +218,10 @@
             // 
             // frmPingPong
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(600, 461);
+            this.ClientSize = new System.Drawing.Size(600, 496);
             this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.lblLevelLabel);
             this.Controls.Add(this.lblGameOverLabel);
@@ -223,10 +231,12 @@
             this.Controls.Add(this.lblLivesLabel);
             this.Controls.Add(this.pnlPingPong);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "frmPingPong";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "PingPong v2.0.0";
             this.Load += new System.EventHandler(this.frmPingPong_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPingPong_KeyDown);
@@ -259,6 +269,7 @@
         private System.Windows.Forms.Label lblGameOverLabel;
         private System.Windows.Forms.Label lblLevelLabel;
         private System.Windows.Forms.Label lblLevel;
+        private System.Windows.Forms.ToolStripMenuItem highScoresToolStripMenuItem;
     }
 }
 

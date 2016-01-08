@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PingPong
@@ -28,10 +29,11 @@ namespace PingPong
         int lblgody; // Game over label movement in y axis
         int lblgox; // Game over label x position
         int lblgoy; // Game over label y position
-        int score; // Counter for how many times ball hits the paddle
+        public static int score; // Counter for how many times ball hits the paddle
+        public static string[] highscores; // Array for all high scores
         int life; // Number of lives
         int level; // Level and score + difficulty multiplier
-        int levelscore; // Level score;
+        int levelscore; // Level score
 
         Boolean hit;
         Boolean gameover;
@@ -69,7 +71,7 @@ namespace PingPong
                 lblgodx = 1;
                 lblgody = 1;
                 lblgox = 210;
-                lblgoy = 62;
+                lblgoy = 72;
                 score = 0;
                 life = 3;
                 level = 1;
@@ -86,6 +88,82 @@ namespace PingPong
                 lblLevel.Text = level.ToString();
                 lblGameOverLabel.Text = "";
                 lblGameOverLabel.BackColor = Color.White;
+
+                gameTimer.Start();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
+            }
+        }
+
+        public static void readHighScores() // For reading high scores from file to array
+        {
+            try
+            {
+                if (File.Exists("highscores"))
+                {
+                    highscores = File.ReadAllLines("highscores");
+                }
+                else
+                {
+                    createHighScores();
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
+            }
+        }
+
+        public static void saveHighScores(string playername, int playerscore) // For saving new high score to file
+        {
+            try
+            {
+                int i = 9;
+                string[] highscorelinesplit;
+                Boolean scorefound = false;
+
+                foreach (string highscoreline in highscores.Reverse())
+                {
+                    highscorelinesplit = highscoreline.Split(' ');
+
+                    if (Int32.Parse(highscorelinesplit[0]) < score && scorefound == false)
+                    {
+                        highscores[i--] = playerscore.ToString() + " | " + playername;
+                        scorefound = true;
+                    }
+                }
+
+                File.WriteAllLines("highscores", highscores);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
+            }
+        }
+
+        private static void createHighScores() // For creating high scores file
+        {
+            try
+            {
+                string[] generatescores = {
+                    "100 | AAA",
+                    "90 | BBB",
+                    "80 | CCC",
+                    "70 | DDD",
+                    "60 | EEE",
+                    "50 | FFF",
+                    "40 | GGG",
+                    "30 | HHH",
+                    "20 | III",
+                    "10 | JJJ"
+                };
+
+                File.WriteAllLines("highscores", generatescores);
+
+                readHighScores();
+
             }
             catch (Exception exc)
             {
@@ -216,16 +294,21 @@ namespace PingPong
                         life--;
                         lblLife.Text = life.ToString();
                         by = 1;
-                        if (life < 1) // Preparations for game over
+                        if (life < 1) // Preparations for game over (all nessessary method calls goes here)
                         {
-                            lblGameOverLabel.Location = new Point(210, 62);
+                            imgPaddle.Location = new Point(275, 600);
+                            lblGameOverLabel.Location = new Point(lblgox, lblgoy);
                             lblGameOverLabel.BackColor = Color.Black;
+
                             lblGameOverLabel.Text = "Game over!";
 
                             gameover = true;
 
-                            py = this.pnlPingPong.Height + 1;
-                            by = this.pnlPingPong.Height + 1;
+                            if (score > 0) // Show high scores dialog
+                            {
+                                frmSaveScore frmscore = new frmSaveScore();
+                                frmscore.ShowDialog();
+                            }
                         }
                     }
                     else
@@ -233,10 +316,9 @@ namespace PingPong
                         hit = false;
                     }
                 }
-                else if (life <= 0 || gameover) // All the lives are gone or the game is over
+                else if (life <= 0 || gameover) // Game over animation starts when game is over
                 {
                     lblGameOverLabel.Location = new Point(lblgox, lblgoy);
-                    imgPaddle.Location = new Point(275, 600);
 
                     lblgox += lblgodx;
                     lblgoy += lblgody;
@@ -246,7 +328,7 @@ namespace PingPong
                         lblgodx = -lblgodx;
                     }
 
-                    if (lblgoy < 61 || lblgoy > pnlPingPong.Height)
+                    if (lblgoy < 71 || lblgoy > pnlPingPong.Height + lblGameOverLabel.Height)
                     {
                         lblgody = -lblgody;
                     }
