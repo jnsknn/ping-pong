@@ -1,12 +1,17 @@
 # PingPong
 
-Simple Windows Forms Application game.
+Windows Forms Application game.
 
 Goal of this game is to get as big score as possible. A player gains points when a ball hits a paddle. All the points are counted towards final score.
 
 The game is over when the player has lost all lives. A single life is lost when the ball misses the paddle.
 
-The player can control the paddle with a mouse by keeping a cursor of the mouse on the black game area.
+The player can control the paddle with arrow keys. Arrow left for moving the paddle to left and arrow right for moving the paddle to right.
+
+# v1.2.0
+- smoother sprites for the ball and the paddle
+- changed controls to arrow keys only
+- the ball has a small bouncing effect when it hits the walls or the paddle
 
 # v1.1.4
 - production ready stable release
