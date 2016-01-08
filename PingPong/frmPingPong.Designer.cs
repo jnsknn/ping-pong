@@ -63,7 +63,6 @@
             this.pnlPingPong.Name = "pnlPingPong";
             this.pnlPingPong.Size = new System.Drawing.Size(600, 400);
             this.pnlPingPong.TabIndex = 0;
-            this.pnlPingPong.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlPingPong_MouseMove);
             // 
             // imgBall
             // 
@@ -228,8 +227,9 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "frmPingPong";
-            this.Text = "PingPong v1.1.4";
+            this.Text = "PingPong v1.2.0";
             this.Load += new System.EventHandler(this.frmPingPong_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPingPong_KeyDown);
             this.pnlPingPong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgBall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPaddle)).EndInit();

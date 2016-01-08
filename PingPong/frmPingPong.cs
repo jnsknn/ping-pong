@@ -116,7 +116,11 @@ namespace PingPong
             {
                 if (life > 0 || gameover == false)
                 {
+                    imgPaddle.Location = new Point(px, py); // Sets a new point for the paddle every time when gameTimer ticks
                     imgBall.Location = new Point(bx, by); // Sets a new point for the ball every time when gameTimer ticks
+
+                    px = imgPaddle.Location.X;
+                    py = imgPaddle.Location.Y;
 
                     if (!hit)
                     {
@@ -124,24 +128,67 @@ namespace PingPong
                         by += bdy; // Increasing the ball y position every time when gameTimer ticks
                     }
 
-                    if (bx < 0) // If the ball hits the left wall, change the ball x direction to opposite
+                    if (bx < -10) // If the ball hits the left wall, change the ball x direction to opposite
                     {
+                        bx = imgBall.Width; // Bounce
+
+                        if (bdy < 0) // This is to know which direction in y axis we want to bounce the ball...
+                        {
+                            by += -(imgBall.Height / 2); // ...left...
+                        }
+                        else
+                        {
+                            by += (imgBall.Height / 2); // ... or right
+                        }
+
                         bdx = -bdx;
                     }
-                    else if (bx + 10 > this.pnlPingPong.Width) // If the ball hits the right wall, change the ball x direction to opposite
+                    else if (bx + 10 > this.pnlPingPong.Width + 10) // If the ball hits the right wall, change the ball x direction to opposite
                     {
+                        bx = this.pnlPingPong.Width - imgBall.Width; // Bounce
+
+                        if (bdy < 0) // This is to know which direction in y axis we want to bounce the ball...
+                        {
+                            by += -(imgBall.Height / 2); // ...left...
+                        }
+                        else
+                        {
+                            by += (imgBall.Height / 2); // ... or right
+                        }
+
                         bdx = -bdx;
                     }
 
-                    if (by < 0) // If the ball hits the top, change the ball y direction to opposite
+                    if (by < -10) // If the ball hits the top, change the ball y direction to opposite
                     {
+                        by = imgBall.Height; // Bounce
+
+                        if (bdx < 0) // This is to know which direction in x axis we want to bounce the ball...
+                        {
+                            bx += -(imgBall.Width / 2); // ...left...
+                        }
+                        else
+                        {
+                            bx += (imgBall.Width / 2); // ... or right
+                        }
+
                         bdy = -bdy;
                     }
 
                     if ((bx + 10 >= px && bx <= px + 50) && (by + 10 >= py && by <= py + 10)) // If the ball hits the paddle
                     {
                         hit = true;
+
                         by += -(imgBall.Height + imgPaddle.Height); // This is for bouncing the ball when it's hitting the paddle to avoid "cheating"
+
+                        if (bdx < 0) // This is to know which direction in x axis we want to bounce the ball...
+                        {
+                            bx += -(imgBall.Width / 2); // ...left...
+                        }
+                        else
+                        {
+                            bx += (imgBall.Width / 2); // ... or right
+                        }
 
                         if ((level <= 1) || ((level > 1 && level <= 5) && score-levelscore > levelscore+5) || (level > 5 && score - levelscore > levelscore)) // Level change
                         {
@@ -204,32 +251,9 @@ namespace PingPong
                         lblgody = -lblgody;
                     }
                 }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
-            }
-        }
 
-        private void pnlPingPong_MouseMove(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (hit == false)
-                {
-                    px = e.X; // Changes the paddle x position equal to mouse x position if the ball is not hitting the paddle
+                this.Invalidate();
 
-                    if (px < 0) // Freeze the paddle against the left wall if it tries to escape from pnlPingPong 
-                    {
-                        px = 0;
-                    }
-                    else if (px > this.pnlPingPong.Width - 50) // Freeze the paddle against the right wall if it tries to escape from pnlPingPong 
-                    {
-                        px = this.pnlPingPong.Width - 50;
-                    }
-
-                    imgPaddle.Location = new Point(px, py); // Sets a new point for the paddle
-                }
             }
             catch (Exception exc)
             {
@@ -259,6 +283,34 @@ namespace PingPong
                     {
                         gameTimer.Start();
                     }
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
+            }
+        }
+
+        private void frmPingPong_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Right && px < this.pnlPingPong.Width - 50)
+                {
+                    px += level * 10; // Speed of the paddle is relative to level
+                }
+                else if (e.KeyCode == Keys.Left && px > 0)
+                {
+                    px += -level * 10; // Speed of the paddle is relative to level
+                }
+
+                if (px <= 0) // Freeze the paddle against the left wall if it tries to escape from pnlPingPong 
+                {
+                    px = 0;
+                }
+                else if (px >= this.pnlPingPong.Width - 50) // Freeze the paddle against the right wall if it tries to escape from pnlPingPong 
+                {
+                    px = this.pnlPingPong.Width - 50;
                 }
             }
             catch (Exception exc)
