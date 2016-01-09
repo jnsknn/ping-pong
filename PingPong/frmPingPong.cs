@@ -301,15 +301,15 @@ namespace PingPong
                         by = 1;
                         if (life < 1) // Preparations for game over (all nessessary method calls goes here)
                         {
-                            imgPaddle.Location = new Point(275, 600);
-                            lblGameOverLabel.Location = new Point(lblgox, lblgoy);
+                            imgPaddle.Location = new Point(275, 600); // Hide the paddle
+                            lblGameOverLabel.Location = new Point(lblgox, lblgoy); // Show game over label
                             lblGameOverLabel.BackColor = Color.Black;
 
                             lblGameOverLabel.Text = "Game over!";
 
                             gameover = true;
 
-                            readHighScores();
+                            readHighScores(); // For updating array highscores before checking
 
                             if (checkHighScores() < 11) // If player has high enough score for top 10, open frmSaveScore dialog
                             {
