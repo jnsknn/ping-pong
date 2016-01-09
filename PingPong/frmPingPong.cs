@@ -120,19 +120,6 @@ namespace PingPong
         {
             try
             {
-                int i = 9;
-                string[] highscorelinesplit = new string[3];
-                int[] scorepoints = new int[10];
-                Boolean scorefound = false;
-
-                foreach (string highscoreline in highscores) // For iterating all high scores saved to array from file in readHighScores()
-                {
-                    highscorelinesplit = highscoreline.Split(' '); // Takes only score part of the string for later comparing purposes
-                    scorepoints[i--] = Int32.Parse(highscorelinesplit[0]);
-                }
-
-
-
                 File.WriteAllLines("highscores", highscores);
             }
             catch (Exception exc)
@@ -167,6 +154,26 @@ namespace PingPong
             {
                 MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
             }
+        }
+        private static int checkHighScores() // For checking if player has enough points to make it in top 10
+        {
+            int i = 0;
+            int j = 11; // Counter for identifying players placement in top 10
+            string[] highscorelinesplit = new string[3];
+            int scoreline;
+
+            foreach (string highscoreline in highscores) // For iterating all high scores saved to array from file in readHighScores()
+            {
+                highscorelinesplit = highscoreline.Split(' '); // Takes only score part of the string for later comparing purposes
+                scoreline = Int32.Parse(highscorelinesplit[0]);
+
+                if (scoreline < score)
+                {
+                    j--;
+                }
+            }
+
+            return j;
         }
 
         // Events
@@ -302,7 +309,9 @@ namespace PingPong
 
                             gameover = true;
 
-                            if (score > 0) // Show high scores dialog
+                            readHighScores();
+
+                            if (checkHighScores() < 11) // If player has high enough score for top 10, open frmSaveScore dialog
                             {
                                 frmSaveScore frmscore = new frmSaveScore();
                                 frmscore.ShowDialog();

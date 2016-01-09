@@ -42,6 +42,7 @@ namespace PingPong
                     {
                         rtbHighScores.Text += highscoreline;
                     }
+                    i++;
                 }
             }
             catch (Exception exc)

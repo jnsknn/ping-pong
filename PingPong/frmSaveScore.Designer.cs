@@ -57,9 +57,9 @@
             this.lblNewHighScoreLabel.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNewHighScoreLabel.Location = new System.Drawing.Point(13, 14);
             this.lblNewHighScoreLabel.Name = "lblNewHighScoreLabel";
-            this.lblNewHighScoreLabel.Size = new System.Drawing.Size(98, 14);
+            this.lblNewHighScoreLabel.Size = new System.Drawing.Size(239, 14);
             this.lblNewHighScoreLabel.TabIndex = 0;
-            this.lblNewHighScoreLabel.Text = "Congratulations!";
+            this.lblNewHighScoreLabel.Text = "Congratulations! You made it to the top 10!";
             // 
             // lblNewHighScoreInfoLabel
             // 
@@ -75,7 +75,7 @@
             // btnSave
             // 
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnSave.Location = new System.Drawing.Point(108, 324);
+            this.btnSave.Location = new System.Drawing.Point(108, 306);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 25);
             this.btnSave.TabIndex = 3;
@@ -86,7 +86,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(197, 324);
+            this.btnCancel.Location = new System.Drawing.Point(197, 306);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 25);
             this.btnCancel.TabIndex = 4;
@@ -98,13 +98,13 @@
             this.rtbHighScores.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbHighScores.Location = new System.Drawing.Point(47, 98);
             this.rtbHighScores.Name = "rtbHighScores";
-            this.rtbHighScores.Size = new System.Drawing.Size(225, 197);
+            this.rtbHighScores.Size = new System.Drawing.Size(225, 176);
             this.rtbHighScores.TabIndex = 5;
             this.rtbHighScores.Text = "";
             // 
             // txtNameTextBox
             // 
-            this.txtNameTextBox.Location = new System.Drawing.Point(108, 298);
+            this.txtNameTextBox.Location = new System.Drawing.Point(108, 280);
             this.txtNameTextBox.MaxLength = 25;
             this.txtNameTextBox.Name = "txtNameTextBox";
             this.txtNameTextBox.Size = new System.Drawing.Size(164, 20);
@@ -114,7 +114,7 @@
             // 
             this.lblCurrentScoreLabel.AutoSize = true;
             this.lblCurrentScoreLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentScoreLabel.Location = new System.Drawing.Point(12, 298);
+            this.lblCurrentScoreLabel.Location = new System.Drawing.Point(12, 280);
             this.lblCurrentScoreLabel.Name = "lblCurrentScoreLabel";
             this.lblCurrentScoreLabel.Size = new System.Drawing.Size(50, 18);
             this.lblCurrentScoreLabel.TabIndex = 7;
@@ -124,7 +124,7 @@
             // 
             this.lblCurrentScore.AutoSize = true;
             this.lblCurrentScore.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentScore.Location = new System.Drawing.Point(68, 298);
+            this.lblCurrentScore.Location = new System.Drawing.Point(68, 280);
             this.lblCurrentScore.Name = "lblCurrentScore";
             this.lblCurrentScore.Size = new System.Drawing.Size(16, 17);
             this.lblCurrentScore.TabIndex = 8;
@@ -266,7 +266,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(284, 361);
+            this.ClientSize = new System.Drawing.Size(284, 341);
             this.ControlBox = false;
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
