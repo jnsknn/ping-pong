@@ -128,7 +128,7 @@ namespace PingPong
                 {
                     if (i == rank) // If player rank matches index number...
                     {
-                        highscores[rank - 1] = playerscore.ToString() + " | " + playername; // ...then replace whole string with a new one
+                        highscores[rank - 1] = playerscore.ToString() + ";" + playername; // ...then replace whole string with a new one
                     }
                     else // Else, drop other ranks in top 10 down by one
                     {
@@ -150,16 +150,16 @@ namespace PingPong
             try
             {
                 string[] generatescores = {
-                    "100 | AAA",
-                    "90 | BBB",
-                    "80 | CCC",
-                    "70 | DDD",
-                    "60 | EEE",
-                    "50 | FFF",
-                    "40 | GGG",
-                    "30 | HHH",
-                    "20 | III",
-                    "10 | JJJ"
+                    "100;AAA",
+                    "90;BBB",
+                    "80;CCC",
+                    "70;DDD",
+                    "60;EEE",
+                    "50;FFF",
+                    "40;GGG",
+                    "30;HHH",
+                    "20;III",
+                    "10;JJJ"
                 };
 
                 File.WriteAllLines("highscores", generatescores);
@@ -175,12 +175,12 @@ namespace PingPong
         public static int checkHighScores() // For checking if player has enough points to make it in top 10
         {
             int i = 11; // Counter for identifying players rank in top 10
-            string[] highscorelinesplit = new string[3];
+            string[] highscorelinesplit = new string[2];
             int scoreline;
 
             foreach (string highscoreline in highscores) // For iterating all high scores saved to array from file in readHighScores()
             {
-                highscorelinesplit = highscoreline.Split(' '); // Takes only score part of the string for later comparing purposes
+                highscorelinesplit = highscoreline.Split(';'); // Takes only score part of the string for later comparing purposes
                 scoreline = Int32.Parse(highscorelinesplit[0]);
 
                 if (scoreline < score)
@@ -335,8 +335,8 @@ namespace PingPong
 
                             if (checkHighScores() < 11) // If player has high enough score for top 10, open frmSaveScore dialog
                             {
-                                frmSaveScore frmscore = new frmSaveScore();
-                                frmscore.ShowDialog();
+                                frmSaveScore frmsavescore = new frmSaveScore();
+                                frmsavescore.ShowDialog();
                             }
                         }
                     }
@@ -379,16 +379,16 @@ namespace PingPong
                 if (gameover)
                 {
                     DialogResult dr = new DialogResult();
-                    frmAboutBox abtbox = new frmAboutBox();
-                    dr = abtbox.ShowDialog();
+                    frmAboutBox frmaboutbox = new frmAboutBox();
+                    dr = frmaboutbox.ShowDialog();
                 }
                 else
                 {
                     gameTimer.Stop();
 
                     DialogResult dr = new DialogResult();
-                    frmAboutBox abtbox = new frmAboutBox();
-                    dr = abtbox.ShowDialog();
+                    frmAboutBox frmaboutbox = new frmAboutBox();
+                    dr = frmaboutbox.ShowDialog();
 
                     if (dr == DialogResult.OK)
                     {
@@ -432,6 +432,36 @@ namespace PingPong
                 else if (px >= this.pnlPingPong.Width - 50) // Freeze the paddle against the right wall if it tries to escape from pnlPingPong 
                 {
                     px = this.pnlPingPong.Width - 50;
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
+            }
+        }
+
+        private void highScoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (gameover)
+                {
+                    DialogResult dr = new DialogResult();
+                    frmHighScores frmhighscores = new frmHighScores();
+                    dr = frmhighscores.ShowDialog();
+                }
+                else
+                {
+                    gameTimer.Stop();
+
+                    DialogResult dr = new DialogResult();
+                    frmHighScores frmhighscores = new frmHighScores();
+                    dr = frmhighscores.ShowDialog();
+
+                    if (dr == DialogResult.OK)
+                    {
+                        gameTimer.Start();
+                    }
                 }
             }
             catch (Exception exc)

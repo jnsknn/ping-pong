@@ -115,8 +115,9 @@
             // highScoresToolStripMenuItem
             // 
             this.highScoresToolStripMenuItem.Name = "highScoresToolStripMenuItem";
-            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.highScoresToolStripMenuItem.Text = "High Scores";
+            this.highScoresToolStripMenuItem.Click += new System.EventHandler(this.highScoresToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 

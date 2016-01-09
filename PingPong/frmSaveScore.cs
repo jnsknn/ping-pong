@@ -43,6 +43,9 @@ namespace PingPong
             {
                 savename = string.Concat(txtNameTextBox.Text.Where(char.IsLetterOrDigit)); // This removes every char from string that is not letter or digit
                 frmPingPong.saveHighScores(savename, frmPingPong.score);
+
+                frmHighScores frmhighscores = new frmHighScores();
+                frmhighscores.ShowDialog();
             }
             catch (Exception exc)
             {
