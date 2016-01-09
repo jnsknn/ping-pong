@@ -47,6 +47,7 @@
             this.lblGameOverLabel = new System.Windows.Forms.Label();
             this.lblLevelLabel = new System.Windows.Forms.Label();
             this.lblLevel = new System.Windows.Forms.Label();
+            this.lblTipLabel = new System.Windows.Forms.Label();
             this.pnlPingPong.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPaddle)).BeginInit();
@@ -216,12 +217,22 @@
             this.lblLevel.TabIndex = 7;
             this.lblLevel.Text = "1";
             // 
+            // lblTipLabel
+            // 
+            this.lblTipLabel.AutoSize = true;
+            this.lblTipLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipLabel.Location = new System.Drawing.Point(165, 44);
+            this.lblTipLabel.Name = "lblTipLabel";
+            this.lblTipLabel.Size = new System.Drawing.Size(0, 17);
+            this.lblTipLabel.TabIndex = 8;
+            // 
             // frmPingPong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(600, 496);
+            this.Controls.Add(this.lblTipLabel);
             this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.lblLevelLabel);
             this.Controls.Add(this.lblGameOverLabel);
@@ -270,6 +281,7 @@
         private System.Windows.Forms.Label lblLevelLabel;
         private System.Windows.Forms.Label lblLevel;
         private System.Windows.Forms.ToolStripMenuItem highScoresToolStripMenuItem;
+        private System.Windows.Forms.Label lblTipLabel;
     }
 }
 

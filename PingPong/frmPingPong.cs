@@ -86,6 +86,7 @@ namespace PingPong
                 lblScore.Text = score.ToString();
                 lblLife.Text = life.ToString();
                 lblLevel.Text = level.ToString();
+                lblTipLabel.Text = "";
                 lblGameOverLabel.Text = "";
                 lblGameOverLabel.BackColor = Color.White;
 
@@ -208,7 +209,7 @@ namespace PingPong
             newGame();
         }
 
-        private void gameTimer_Tick(object sender, EventArgs e)
+        private void gameTimer_Tick(object sender, EventArgs e) // All animation and movement happens in this event
         {
             try
             {
@@ -314,6 +315,12 @@ namespace PingPong
                         life--;
                         lblLife.Text = life.ToString();
                         by = 1;
+
+                        if (score <= 0)
+                        {
+                            lblTipLabel.Text = "Pro tip: you can move the paddle with left or right arrow keys!";
+                        }
+
                         if (life < 1) // Preparations for game over (all nessessary method calls goes here)
                         {
                             imgPaddle.Location = new Point(275, 600); // Hide the paddle
@@ -402,10 +409,20 @@ namespace PingPong
                 if (e.KeyCode == Keys.Right && px < this.pnlPingPong.Width - 50)
                 {
                     px += level * 10; // Speed of the paddle is relative to level
+
+                    if (lblTipLabel.Text != "") // For removing tip text if the player moves the paddle
+                    {
+                        lblTipLabel.Text = "";
+                    }
                 }
                 else if (e.KeyCode == Keys.Left && px > 0)
                 {
                     px += -level * 10; // Speed of the paddle is relative to level
+
+                    if (lblTipLabel.Text != "") // For removing tip text if the player moves the paddle
+                    {
+                        lblTipLabel.Text = "";
+                    }
                 }
 
                 if (px <= 0) // Freeze the paddle against the left wall if it tries to escape from pnlPingPong 
