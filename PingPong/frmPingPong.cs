@@ -29,8 +29,8 @@ namespace PingPong
         int lblgody; // Game over label movement in y axis
         int lblgox; // Game over label x position
         int lblgoy; // Game over label y position
-        public static int score; // Counter for how many times ball hits the paddle
-        public static string[] highscores; // Array for all high scores
+        public static int score; // Player score
+        public static string[] highscores = new string[10]; // Array for top 10 high scores
         int life; // Number of lives
         int level; // Level and score + difficulty multiplier
         int levelscore; // Level score
@@ -121,19 +121,17 @@ namespace PingPong
             try
             {
                 int i = 9;
-                string[] highscorelinesplit;
+                string[] highscorelinesplit = new string[3];
+                int[] scorepoints = new int[10];
                 Boolean scorefound = false;
 
-                foreach (string highscoreline in highscores.Reverse())
+                foreach (string highscoreline in highscores) // For iterating all high scores saved to array from file in readHighScores()
                 {
-                    highscorelinesplit = highscoreline.Split(' ');
-
-                    if (Int32.Parse(highscorelinesplit[0]) < score && scorefound == false)
-                    {
-                        highscores[i--] = playerscore.ToString() + " | " + playername;
-                        scorefound = true;
-                    }
+                    highscorelinesplit = highscoreline.Split(' '); // Takes only score part of the string for later comparing purposes
+                    scorepoints[i--] = Int32.Parse(highscorelinesplit[0]);
                 }
+
+
 
                 File.WriteAllLines("highscores", highscores);
             }
