@@ -35,8 +35,8 @@ namespace PingPong
         int level; // Level and score + difficulty multiplier
         int levelscore; // Level score
 
-        Boolean hit;
-        Boolean gameover;
+        bool hit;
+        bool gameover;
 
         Random r = new Random();
 
@@ -120,6 +120,22 @@ namespace PingPong
         {
             try
             {
+                int rank = checkHighScores(); // For getting player rank
+                int i = 10;
+
+                for (i=10;i >= rank;i--)
+                {
+                    if (i == rank) // If player rank matches index number...
+                    {
+                        highscores[rank - 1] = playerscore.ToString() + " | " + playername; // ...then replace whole string with a new one
+                    }
+                    else // Else, drop other ranks in top 10 down by one
+                    {
+                        highscores[i - 1] = highscores[i - 2];
+                    }
+                    
+                }
+                
                 File.WriteAllLines("highscores", highscores);
             }
             catch (Exception exc)
@@ -157,8 +173,7 @@ namespace PingPong
         }
         private static int checkHighScores() // For checking if player has enough points to make it in top 10
         {
-            int i = 0;
-            int j = 11; // Counter for identifying players placement in top 10
+            int i = 11; // Counter for identifying players rank in top 10
             string[] highscorelinesplit = new string[3];
             int scoreline;
 
@@ -169,11 +184,11 @@ namespace PingPong
 
                 if (scoreline < score)
                 {
-                    j--;
+                    i--;
                 }
             }
 
-            return j;
+            return i;
         }
 
         // Events
