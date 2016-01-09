@@ -171,7 +171,7 @@ namespace PingPong
                 MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
             }
         }
-        private static int checkHighScores() // For checking if player has enough points to make it in top 10
+        public static int checkHighScores() // For checking if player has enough points to make it in top 10
         {
             int i = 11; // Counter for identifying players rank in top 10
             string[] highscorelinesplit = new string[3];

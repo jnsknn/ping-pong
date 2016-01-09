@@ -26,24 +26,10 @@ namespace PingPong
         {
             try
             {
-                int i = 0;
+                int rank = frmPingPong.checkHighScores();
 
                 lblCurrentScore.Text = frmPingPong.score.ToString();
-
-                frmPingPong.readHighScores();
-
-                foreach (string highscoreline in frmPingPong.highscores)
-                {
-                    if (i < 9)
-                    {
-                        rtbHighScores.Text += highscoreline + "\n";
-                    }
-                    else
-                    {
-                        rtbHighScores.Text += highscoreline;
-                    }
-                    i++;
-                }
+                lblRank.Text = rank.ToString() + ".";
             }
             catch (Exception exc)
             {
