@@ -11,77 +11,141 @@ using System.Windows.Forms;
 
 namespace PingPong
 {
-    /* This program is a game which allow the player to return the ball. If the ball passes the paddle, player will lose a life.
-        When lives are less than zero, game is over */
+    /* Windows Forms Application game.
+
+    Goal of this game is to get as big score as possible. A player gains points when a ball hits a paddle. All the points are counted towards final score.
+    The game is over when the player has lost all lives. A single life is lost when the ball misses the paddle.
+    The player can control the paddle with arrow keys. Arrow left for moving the paddle to left and arrow right for moving the paddle to right.*/
 
     public partial class frmPingPong : Form
     {
-        // Initial variables
-
-        int speed; // Ball speed
-        int bdx; // Ball movement in x axis
-        int bdy; // Ball movement in y axis
-        int bx; // Ball x position
-        int by; // Ball y position
-        int px; // Paddle x position
-        int py; // Paddle y position
-        int lblgodx; // Game over label movement in x axis
-        int lblgody; // Game over label movement in y axis
-        int lblgox; // Game over label x position
-        int lblgoy; // Game over label y position
-        public static int score; // Player score
-        public static string[] highscores = new string[10]; // Array for top 10 high scores
-        int life; // Number of lives
-        int level; // Level and score + difficulty multiplier
-        int levelscore; // Level score
-
-        bool hit;
-        bool gameover;
-
-        Random r = new Random();
-
-        // Methods
 
         public frmPingPong()
         {
             InitializeComponent();
         }
 
-        public void newGame()
+        // Moving ingame components as structs
+
+        public struct Ball
         {
-            // This method resets everything to starting position and starts the game from the beginning immediatly. The balls x starting position and direction is defined randomly.
+            public int speedx, speedy, x, y, width, height; // Ball speed in x axis, speed in y axis, position in x axis, position in y axis, width, height
+
+            public Ball( int ballspeedx, int ballspeedy, int ballx, int bally, int ballwidth, int ballheight) // Constructor of the ball
+            {
+                this.speedx = ballspeedx;
+                this.speedy = ballspeedy;
+                this.x = ballx;
+                this.y = bally;
+                this.width = ballwidth;
+                this.height = ballheight;
+            }
+        }
+
+        public struct Paddle
+        {
+            public int speedx, x, y, width, height; // Paddle speed in x axis, position in x axis, position in y axis, width, height
+            public bool moveleft, moveright; // To define which direction the paddle is wanted to move
+
+            public Paddle(int paddlespeedx, int paddlex, int paddley, int paddlewidth, int paddleheight, bool paddlemoveleft, bool paddlemoveright) // Constructor of the paddle
+            {
+                this.speedx = paddlespeedx;
+                this.x = paddlex;
+                this.y = paddley;
+                this.width = paddlewidth;
+                this.height = paddleheight;
+                this.moveleft = paddlemoveleft;
+                this.moveright = paddlemoveright;
+            }
+        }
+
+        public struct GameOver
+        {
+            public int speedx, speedy, x, y, width, height; // GameOver speed in x axis, position in x axis, position in y axis, width, height
+            public bool gameover; // For checking is game over
+
+            public GameOver(int gameoverspeedx, int gameoverspeedy, int gameoverx, int gameovery, int gameoverwidth, int gameoverheight, bool isgameover) // Constructor of the gameover
+            {
+                this.speedx = gameoverspeedx;
+                this.speedy = gameoverspeedy;
+                this.x = gameoverx;
+                this.y = gameovery;
+                this.width = gameoverwidth;
+                this.height = gameoverheight;
+                this.gameover = isgameover;
+            }
+        }
+
+        // Object declarations
+
+        Ball ball;
+        Paddle paddle;
+        GameOver gameover;
+
+        // Public and initial variables declarations
+
+        public static int score; // Player score
+        public static string[] highscores = new string[10]; // Array for top 10 high scores
+
+        int speed; // Starting speed of the game
+        int life; // Number of lives
+        int level; // Level and score + difficulty multiplier
+        int levelscore; // Level score
+
+        Random r = new Random();
+
+        // Methods
+
+        public void newGame() // This method resets everything to starting position and starts the game from the beginning immediatly. X starting position and direction of the ball is defined randomly.
+        {
+            
             try {
 
-                speed = 1;
+                // Variable initialization
 
-                if (r.Next(2) == 1)
+                speed = 1;
+                score = 0;
+                life = 3;
+                level = speed;
+                levelscore = 0;
+
+                // Object initialization
+
+                if (r.Next(2) == 1) // Defining ball starting direction using random
                 {
-                    bdx = speed;
+                    ball.speedx = speed;
                 }
                 else
                 {
-                    bdx = -speed;
+                    ball.speedx = -speed;
                 }
 
-                bdy = speed;
-                bx = r.Next(1, 591);
-                by = 1;
-                px = 275;
-                py = 385;
-                lblgodx = 1;
-                lblgody = 1;
-                lblgox = 210;
-                lblgoy = 72;
-                score = 0;
-                life = 3;
-                level = 1;
-                levelscore = 0;
+                ball.speedy = speed;
+                ball.x = r.Next(1, 591);// Defining ball starting position in x axis using random
+                ball.y = 1;
+                ball.width = imgBall.Width;
+                ball.height = imgBall.Height;
+                paddle.speedx = ball.width; // The paddle moves one ball width / gameTimer tick
+                paddle.x = 275;
+                paddle.y = 385;
+                paddle.width = imgPaddle.Width;
+                paddle.height = imgPaddle.Height;
+                paddle.moveleft = false;
+                paddle.moveright = false;
+                gameover.speedx = speed;
+                gameover.speedy = speed;
+                gameover.x = 210;
+                gameover.y = 72;
+                gameover.width = lblGameOverLabel.Width;
+                gameover.height = lblGameOverLabel.Height;
+                gameover.gameover = false;
 
-                hit = false;
-                gameover = false;
+                // Initialization of the ball and the paddle location
 
-                imgPaddle.Location = new Point(px, py);
-                lblGameOverLabel.Location = new Point(lblgox, lblgoy);
+                imgPaddle.Location = new Point(paddle.x, paddle.y);
+                lblGameOverLabel.Location = new Point(gameover.x, gameover.y);
+
+                // Label initialization
 
                 lblScore.Text = score.ToString();
                 lblLife.Text = life.ToString();
@@ -90,7 +154,47 @@ namespace PingPong
                 lblGameOverLabel.Text = "";
                 lblGameOverLabel.BackColor = Color.White;
 
+                // Game timer start
+
                 gameTimer.Start();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
+            }
+        }
+
+        public void movePaddle() // This method sets new coordinates to the paddle in x axis
+        {
+            try
+            {
+                if (paddle.moveright && paddle.x < this.pnlPingPong.Width - paddle.width)
+                {
+                    paddle.x += paddle.speedx;
+
+                    if (lblTipLabel.Text != "") // For removing tip text if the player moves the paddle
+                    {
+                        lblTipLabel.Text = "";
+                    }
+                }
+                else if (paddle.moveleft && paddle.x > 0)
+                {
+                    paddle.x += -paddle.speedx;
+
+                    if (lblTipLabel.Text != "") // For removing tip text if the player moves the paddle
+                    {
+                        lblTipLabel.Text = "";
+                    }
+                }
+
+                if (paddle.x <= 0) // Freeze the paddle against the left wall if it tries to escape from pnlPingPong 
+                {
+                    paddle.x = 0;
+                }
+                else if (paddle.x >= this.pnlPingPong.Width - paddle.width) // Freeze the paddle against the right wall if it tries to escape from pnlPingPong 
+                {
+                    paddle.x = this.pnlPingPong.Width - paddle.width;
+                }
             }
             catch (Exception exc)
             {
@@ -209,84 +313,81 @@ namespace PingPong
             newGame();
         }
 
-        private void gameTimer_Tick(object sender, EventArgs e) // All animation and movement happens in this event
+        public void gameTimer_Tick(object sender, EventArgs e) // All animation and movement happens in this event
         {
             try
             {
-                if (life > 0 || gameover == false)
+                if (life > 0 || gameover.gameover == false)
                 {
-                    imgPaddle.Location = new Point(px, py); // Sets a new point for the paddle every time when gameTimer ticks
-                    imgBall.Location = new Point(bx, by); // Sets a new point for the ball every time when gameTimer ticks
+                    movePaddle(); // Calling movePaddle method to move the paddle
 
-                    px = imgPaddle.Location.X;
-                    py = imgPaddle.Location.Y;
+                    imgPaddle.Location = new Point(paddle.x, paddle.y); // Sets a new point for the paddle every time when gameTimer ticks
+                    imgBall.Location = new Point(ball.x, ball.y); // Sets a new point for the ball every time when gameTimer ticks
 
-                    if (!hit)
+                    paddle.x = imgPaddle.Location.X;
+                    paddle.y = imgPaddle.Location.Y;
+
+                    ball.x += ball.speedx; // Increasing the ball x position every time when gameTimer ticks
+                    ball.y += ball.speedy; // Increasing the ball y position every time when gameTimer ticks
+
+                    if (ball.x < 0) // If the ball hits the left wall, change the ball x direction to opposite
                     {
-                        bx += bdx; // Increasing the ball x position every time when gameTimer ticks
-                        by += bdy; // Increasing the ball y position every time when gameTimer ticks
-                    }
+                        ball.x = ball.width; // Bounce
 
-                    if (bx < -10) // If the ball hits the left wall, change the ball x direction to opposite
-                    {
-                        bx = imgBall.Width; // Bounce
-
-                        if (bdy < 0) // This is to know which direction in y axis we want to bounce the ball...
+                        if (ball.speedy < 0) // This is to know which direction in y axis we want to bounce the ball...
                         {
-                            by += -(imgBall.Height / 2); // ...left...
+                            ball.y += -(ball.height / 2); // ...up...
                         }
                         else
                         {
-                            by += (imgBall.Height / 2); // ... or right
+                            ball.y += (ball.height / 2); // ... or down
                         }
 
-                        bdx = -bdx;
+                        ball.speedx = -ball.speedx; // Change direction in x axis
                     }
-                    else if (bx + 10 > this.pnlPingPong.Width + 10) // If the ball hits the right wall, change the ball x direction to opposite
+                    else if (ball.x + ball.width > this.pnlPingPong.Width) // If the ball hits the right wall, change the ball x direction to opposite
                     {
-                        bx = this.pnlPingPong.Width - imgBall.Width; // Bounce
+                        ball.x = this.pnlPingPong.Width - ball.width; // Bounce
 
-                        if (bdy < 0) // This is to know which direction in y axis we want to bounce the ball...
+                        if (ball.speedy < 0) // This is to know which direction in y axis we want to bounce the ball...
                         {
-                            by += -(imgBall.Height / 2); // ...left...
+                            ball.y += -(ball.height / 2); // ...up...
                         }
                         else
                         {
-                            by += (imgBall.Height / 2); // ... or right
+                            ball.y += (ball.height / 2); // ... or down
                         }
 
-                        bdx = -bdx;
+                        ball.speedx = -ball.speedx; // Change direction in x axis
                     }
 
-                    if (by < -10) // If the ball hits the top, change the ball y direction to opposite
+                    if (ball.y < 0) // If the ball hits the top, change the ball y direction to opposite
                     {
-                        by = imgBall.Height; // Bounce
+                        ball.y = ball.height; // Bounce
 
-                        if (bdx < 0) // This is to know which direction in x axis we want to bounce the ball...
+                        if (ball.speedx < 0) // This is to know which direction in x axis we want to bounce the ball...
                         {
-                            bx += -(imgBall.Width / 2); // ...left...
+                            ball.x += -(ball.width / 2); // ...left...
                         }
                         else
                         {
-                            bx += (imgBall.Width / 2); // ... or right
+                            ball.x += (ball.width / 2); // ... or right
                         }
 
-                        bdy = -bdy;
+                        ball.speedy = -ball.speedy; // Change direction in y axis
                     }
 
-                    if ((bx + 10 >= px && bx <= px + 50) && (by + 10 >= py && by <= py + 10)) // If the ball hits the paddle
+                    if ((ball.x + ball.width >= paddle.x && ball.x <= paddle.x + paddle.width) && (ball.y + ball.height >= paddle.y && ball.y <= paddle.y + paddle.height)) // If the ball hits the paddle
                     {
-                        hit = true;
+                        ball.y += -(ball.height + paddle.height); // This is for bouncing the ball when it's hitting the paddle to avoid "cheating"
 
-                        by += -(imgBall.Height + imgPaddle.Height); // This is for bouncing the ball when it's hitting the paddle to avoid "cheating"
-
-                        if (bdx < 0) // This is to know which direction in x axis we want to bounce the ball...
+                        if (ball.speedx < 0) // This is to know which direction in x axis we want to bounce the ball...
                         {
-                            bx += -(imgBall.Width / 2); // ...left...
+                            ball.x += -(ball.width / 2); // ...left...
                         }
                         else
                         {
-                            bx += (imgBall.Width / 2); // ... or right
+                            ball.x += (ball.width / 2); // ... or right
                         }
 
                         if ((level <= 1) || ((level > 1 && level <= 5) && score-levelscore > levelscore+5) || (level > 5 && score - levelscore > levelscore)) // Level change
@@ -296,25 +397,27 @@ namespace PingPong
                             lblLevel.Text = level.ToString();
                         }
 
-                        if (bdx < 0) // This is to know which direction with current level speed in x axis we want to move the ball...
+                        // Level affects speed of the the ball!
+
+                        if (ball.speedx < 0) // This is to know which direction with current level speed in x axis we want to move the ball...
                         {
-                            bdx = -level; // ...left...
+                            ball.speedx = -level; // ...left...
                         }
                         else
                         {
-                            bdx = level; // ... or right
+                            ball.speedx = level; // ... or right
                         }
 
-                        bdy = -level;
+                        ball.speedy = -level;
                         score += level;
                         lblScore.Text = score.ToString();
                     }
-                    else if (by >= this.pnlPingPong.Height + 10) // If the paddle misses the ball
+                    else if (ball.y >= this.pnlPingPong.Height + ball.height) // If the paddle misses the ball
                     {
-                        hit = false;
                         life--;
                         lblLife.Text = life.ToString();
-                        by = 1;
+
+                        ball.y = 1; // Ball reset
 
                         if (score <= 0)
                         {
@@ -324,12 +427,14 @@ namespace PingPong
                         if (life < 1) // Preparations for game over (all nessessary method calls goes here)
                         {
                             imgPaddle.Location = new Point(275, 600); // Hide the paddle
-                            lblGameOverLabel.Location = new Point(lblgox, lblgoy); // Show game over label
+                            lblGameOverLabel.Location = new Point(gameover.x, gameover.y); // Show game over label
                             lblGameOverLabel.BackColor = Color.Black;
 
                             lblGameOverLabel.Text = "Game over!";
 
-                            gameover = true;
+                            gameover.width = lblGameOverLabel.Width;
+
+                            gameover.gameover = true;
 
                             readHighScores(); // For updating array highscores before checking
 
@@ -340,26 +445,22 @@ namespace PingPong
                             }
                         }
                     }
-                    else
-                    {
-                        hit = false;
-                    }
                 }
-                else if (life <= 0 || gameover) // Game over animation starts when game is over
+                else if (life <= 0 || gameover.gameover == true) // Game over animation starts when game is over
                 {
-                    lblGameOverLabel.Location = new Point(lblgox, lblgoy);
+                    lblGameOverLabel.Location = new Point(gameover.x, gameover.y);
 
-                    lblgox += lblgodx;
-                    lblgoy += lblgody;
+                    gameover.x += gameover.speedx;
+                    gameover.y += gameover.speedy;
 
-                    if (lblgox < 0 || lblgox > pnlPingPong.Width - lblGameOverLabel.Width)
+                    if (gameover.x < 0 || gameover.x > pnlPingPong.Width - gameover.width)
                     {
-                        lblgodx = -lblgodx;
+                        gameover.speedx = -gameover.speedx;
                     }
 
-                    if (lblgoy < 71 || lblgoy > pnlPingPong.Height + lblGameOverLabel.Height)
+                    if (gameover.y < 71 || gameover.y > pnlPingPong.Height + gameover.height)
                     {
-                        lblgody = -lblgody;
+                        gameover.speedy = -gameover.speedy;
                     }
                 }
 
@@ -376,7 +477,7 @@ namespace PingPong
         {
             try
             {
-                if (gameover)
+                if (gameover.gameover == true)
                 {
                     DialogResult dr = new DialogResult();
                     frmAboutBox frmaboutbox = new frmAboutBox();
@@ -404,39 +505,25 @@ namespace PingPong
 
         private void frmPingPong_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Left)
             {
-                if (e.KeyCode == Keys.Right && px < this.pnlPingPong.Width - 50)
-                {
-                    px += level * 10; // Speed of the paddle is relative to level
-
-                    if (lblTipLabel.Text != "") // For removing tip text if the player moves the paddle
-                    {
-                        lblTipLabel.Text = "";
-                    }
-                }
-                else if (e.KeyCode == Keys.Left && px > 0)
-                {
-                    px += -level * 10; // Speed of the paddle is relative to level
-
-                    if (lblTipLabel.Text != "") // For removing tip text if the player moves the paddle
-                    {
-                        lblTipLabel.Text = "";
-                    }
-                }
-
-                if (px <= 0) // Freeze the paddle against the left wall if it tries to escape from pnlPingPong 
-                {
-                    px = 0;
-                }
-                else if (px >= this.pnlPingPong.Width - 50) // Freeze the paddle against the right wall if it tries to escape from pnlPingPong 
-                {
-                    px = this.pnlPingPong.Width - 50;
-                }
+                paddle.moveleft = true;
             }
-            catch (Exception exc)
+            else if (e.KeyCode == Keys.Right)
             {
-                MessageBox.Show("Error: " + exc + "\n" + "\n" + "Go to https://github.com/jnsknn/ping-pong/issues and see if there is an issue about this bug. If not, create a new issue or contact me via email.");
+                paddle.moveright = true;
+            }
+        }
+
+        private void frmPingPong_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                paddle.moveleft = false;
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                paddle.moveright = false;
             }
         }
 
@@ -444,7 +531,7 @@ namespace PingPong
         {
             try
             {
-                if (gameover)
+                if (gameover.gameover == true)
                 {
                     DialogResult dr = new DialogResult();
                     frmHighScores frmhighscores = new frmHighScores();

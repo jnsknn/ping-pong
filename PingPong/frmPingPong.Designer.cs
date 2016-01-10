@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlPingPong = new System.Windows.Forms.Panel();
+            this.imgBall = new System.Windows.Forms.PictureBox();
+            this.imgPaddle = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,12 +48,10 @@
             this.lblLevelLabel = new System.Windows.Forms.Label();
             this.lblLevel = new System.Windows.Forms.Label();
             this.lblTipLabel = new System.Windows.Forms.Label();
-            this.imgBall = new System.Windows.Forms.PictureBox();
-            this.imgPaddle = new System.Windows.Forms.PictureBox();
             this.pnlPingPong.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPaddle)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlPingPong
@@ -65,6 +65,24 @@
             this.pnlPingPong.Name = "pnlPingPong";
             this.pnlPingPong.Size = new System.Drawing.Size(600, 431);
             this.pnlPingPong.TabIndex = 0;
+            // 
+            // imgBall
+            // 
+            this.imgBall.Image = global::PingPong.Properties.Resources.ball;
+            this.imgBall.Location = new System.Drawing.Point(1, 1);
+            this.imgBall.Name = "imgBall";
+            this.imgBall.Size = new System.Drawing.Size(10, 11);
+            this.imgBall.TabIndex = 1;
+            this.imgBall.TabStop = false;
+            // 
+            // imgPaddle
+            // 
+            this.imgPaddle.Image = global::PingPong.Properties.Resources.paddle;
+            this.imgPaddle.Location = new System.Drawing.Point(275, 415);
+            this.imgPaddle.Name = "imgPaddle";
+            this.imgPaddle.Size = new System.Drawing.Size(50, 11);
+            this.imgPaddle.TabIndex = 0;
+            this.imgPaddle.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -90,21 +108,21 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // highScoresToolStripMenuItem
             // 
             this.highScoresToolStripMenuItem.Name = "highScoresToolStripMenuItem";
-            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.highScoresToolStripMenuItem.Text = "High Scores";
             this.highScoresToolStripMenuItem.Click += new System.EventHandler(this.highScoresToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -209,24 +227,6 @@
             this.lblTipLabel.Size = new System.Drawing.Size(0, 17);
             this.lblTipLabel.TabIndex = 8;
             // 
-            // imgBall
-            // 
-            this.imgBall.Image = global::PingPong.Properties.Resources.ball;
-            this.imgBall.Location = new System.Drawing.Point(1, 1);
-            this.imgBall.Name = "imgBall";
-            this.imgBall.Size = new System.Drawing.Size(10, 11);
-            this.imgBall.TabIndex = 1;
-            this.imgBall.TabStop = false;
-            // 
-            // imgPaddle
-            // 
-            this.imgPaddle.Image = global::PingPong.Properties.Resources.paddle;
-            this.imgPaddle.Location = new System.Drawing.Point(275, 415);
-            this.imgPaddle.Name = "imgPaddle";
-            this.imgPaddle.Size = new System.Drawing.Size(50, 11);
-            this.imgPaddle.TabIndex = 0;
-            this.imgPaddle.TabStop = false;
-            // 
             // frmPingPong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -252,11 +252,12 @@
             this.Text = "PingPong v2.1.0-beta";
             this.Load += new System.EventHandler(this.frmPingPong_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPingPong_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmPingPong_KeyUp);
             this.pnlPingPong.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPaddle)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
