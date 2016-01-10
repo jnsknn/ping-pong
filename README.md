@@ -8,6 +8,10 @@ The game is over when the player has lost all lives. A single life is lost when 
 
 The player can control the paddle with arrow keys. Arrow left for moving the paddle to left and arrow right for moving the paddle to right.
 
+# v2.1.1
+- minor code and performance optimizations
+- the paddle controls are more responsive
+
 # v2.1.0-beta
 - introducing new high scores feature
     - scores can now be saved if the player gets enough points to make it to the top 10
