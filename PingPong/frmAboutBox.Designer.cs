@@ -63,9 +63,9 @@
             this.lblVersionLabel.AutoSize = true;
             this.lblVersionLabel.Location = new System.Drawing.Point(119, 37);
             this.lblVersionLabel.Name = "lblVersionLabel";
-            this.lblVersionLabel.Size = new System.Drawing.Size(62, 14);
+            this.lblVersionLabel.Size = new System.Drawing.Size(37, 14);
             this.lblVersionLabel.TabIndex = 2;
-            this.lblVersionLabel.Text = "v2.1.0-beta";
+            this.lblVersionLabel.Text = "v2.1.1";
             // 
             // lblCopyrightLabel
             // 

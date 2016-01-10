@@ -249,7 +249,7 @@
             this.MaximizeBox = false;
             this.Name = "frmPingPong";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "PingPong v2.1.0-beta";
+            this.Text = "PingPong v2.1.1";
             this.Load += new System.EventHandler(this.frmPingPong_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPingPong_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmPingPong_KeyUp);
