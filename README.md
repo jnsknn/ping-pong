@@ -1,5 +1,7 @@
 # PingPong
 
+*This repository is now archived.*
+
 Windows Forms Application game.
 
 Goal of this game is to get as big score as possible. A player gains points when a ball hits a paddle. All the points are counted towards final score.
